@@ -1,0 +1,48 @@
+#apply the redis deployment from the redis-leader-deployment.yaml file
+kubectl apply -f redis-leader-deployment.yaml
+
+kubectl get pods 
+
+kubectl logs -f deployment/redis-leader 
+
+#create the redis leader service
+kubectl apply -f redis-leader-service.yaml
+
+kubectl get service
+
+#setup redis followers
+kubectl apply -f redis-follower-deployment.yaml
+
+kubectl get pods
+
+#create the redis follower service 
+kubectl apply -f redis-follower-service.yaml
+
+kubectl get service
+
+#create the guestbook frontend deployment
+kubectl apply -f frontend-deployment.yaml
+
+kubectl get pods -l app=guestbook -l tier=frontend 
+
+#create the frontend service
+kubectl apply -f frontend-service.yaml
+
+kubectl get services 
+
+#view frontend service 
+kubectl port-forward svc/frontend 8080:80 
+#now load http://localhost:8080 in your browser
+
+#scale web frontend 
+kubectl scale deployment frontend --replicas=5 
+
+kubectl get pods 
+
+#clean up 
+kubectl delete deployment -l app=redis 
+kubectl delete service -l app=redis 
+kubectl delete deployment frontend 
+kubectl delete service frontend 
+
+kubectl get pods
