@@ -40,9 +40,9 @@ kubectl scale deployment frontend --replicas=5
 kubectl get pods 
 
 #clean up 
-kubectl delete deployment -l app=redis 
-kubectl delete service -l app=redis 
-kubectl delete deployment frontend 
-kubectl delete service frontend 
+#kubectl delete deployment -l app=redis 
+#kubectl delete service -l app=redis 
+#kubectl delete deployment frontend 
+#kubectl delete service frontend 
 
-kubectl get pods
+#kubectl get pods
